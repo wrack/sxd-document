@@ -436,6 +436,15 @@ impl<'d> Element<'d> {
         self.document.wrap_attribute(attr)
     }
 
+    pub fn set_attribute_raw_value<'n, N>(&self, name: N, value: &str) -> Attribute<'d>
+    where
+        N: Into<QName<'n>>,
+    {
+        let attr = self.document.storage.create_raw_value_attribute(name, value);
+        self.document.connections.set_attribute(self.node, attr);
+        self.document.wrap_attribute(attr)
+    }
+
     pub fn attribute_value<'n, N>(&self, name: N) -> Option<&'d str>
     where
         N: Into<QName<'n>>,

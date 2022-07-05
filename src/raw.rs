@@ -375,6 +375,23 @@ impl Storage {
         })
     }
 
+    pub fn create_raw_value_attribute<'n, N>(&self, name: N, value: &str) -> *mut Attribute
+    where
+        N: Into<QName<'n>>,
+    {
+        let name = name.into();
+        let name = self.intern_qname(name);
+        let value = self.intern(value);
+
+        self.attributes.alloc(Attribute {
+            name,
+            preferred_prefix: None,
+            value,
+            parent: None,
+            raw_value: true
+        })
+    }
+
     pub fn create_text(&self, text: &str) -> *mut Text {
         let text = self.intern(text);
 
