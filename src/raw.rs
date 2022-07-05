@@ -49,7 +49,6 @@ pub struct Attribute {
     preferred_prefix: Option<InternedString>,
     value: InternedString,
     parent: Option<*mut Element>,
-    raw_value: bool
 }
 
 impl Attribute {
@@ -58,9 +57,6 @@ impl Attribute {
     }
     pub fn value(&self) -> &str {
         &self.value
-    }
-    pub fn raw_value(&self) -> &bool {
-        &self.raw_value
     }
     pub fn preferred_prefix(&self) -> Option<&str> {
         self.preferred_prefix.map(|p| p.as_slice())
@@ -371,7 +367,6 @@ impl Storage {
             preferred_prefix: None,
             value,
             parent: None,
-            raw_value: false
         })
     }
 

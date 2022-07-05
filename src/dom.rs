@@ -506,10 +506,6 @@ impl<'d> Attribute<'d> {
             .connections
             .remove_attribute_from_parent(self.node);
     }
-
-    pub fn raw_value(&self) -> &bool {
-        &self.node().raw_value()
-    }
 }
 
 impl<'d> fmt::Debug for Attribute<'d> {
