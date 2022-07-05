@@ -424,7 +424,9 @@ impl Writer {
             self.format_qname(attr.name(), mapping, attr.preferred_prefix(), true, writer)?;
             write!(writer, "=")?;
             write!(writer, "{}", self.quote_char())?;
-            if !attr.raw_value() {
+            if *attr.raw_value() {
+                writer.write_str(attr.value())?;
+            } else {
                 self.format_attribute_value(attr.value(), writer)?;
             }
             write!(writer, "{}", self.quote_char())?;
